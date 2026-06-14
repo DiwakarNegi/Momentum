@@ -60,11 +60,18 @@ export default function App() {
         flexDirection: 'column', gap: 16, background: 'var(--bg)',
       }}>
         <div style={{
-          width: 44, height: 44, borderRadius: '50%',
-          background: 'var(--accent)', opacity: 0.8,
-          boxShadow: '0 0 32px -4px var(--accent)',
+          width: 64, height: 64, borderRadius: '50%',
+          background: 'var(--accent)',
+          boxShadow: '0 0 48px -8px var(--accent), 0 0 0 1px rgba(255,255,255,0.08)',
           animation: 'orbBreathe 3s ease-in-out infinite',
-        }} />
+          overflow: 'hidden', position: 'relative',
+        }}>
+          <svg width="64" height="64" viewBox="0 0 72 72" fill="none" style={{ position: 'absolute', inset: 0 }}>
+            <path d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26 L72 72 L0 72 Z" fill="rgba(255,255,255,0.18)" />
+            <path d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26" stroke="rgba(255,255,255,0.7)" strokeWidth="2.5" strokeLinecap="round" />
+            <circle cx="55" cy="22" r="4" fill="white" opacity="0.9" />
+          </svg>
+        </div>
         <p className="muted" style={{ fontSize: 14 }}>
           {session && !synced ? 'Syncing your data…' : 'Loading…'}
         </p>

@@ -39,18 +39,26 @@ export function LoginPage() {
         {/* Logo / wordmark */}
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <div style={{
-            width: 56, height: 56, borderRadius: '50%', margin: '0 auto 16px',
-            background: 'var(--accent)', opacity: 0.9,
-            boxShadow: '0 0 40px -8px var(--accent)',
+            width: 72, height: 72, borderRadius: '50%', margin: '0 auto 18px',
+            background: 'var(--accent)',
+            boxShadow: '0 0 48px -8px var(--accent), 0 0 0 1px rgba(255,255,255,0.08)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
+            overflow: 'hidden', position: 'relative',
           }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="8" opacity=".4" />
-              <circle cx="12" cy="12" r="3.2" />
-              <path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3" />
+            {/* wave fill — echoes the momentum orb */}
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" style={{ position: 'absolute', inset: 0 }}>
+              <path
+                d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26 L72 72 L0 72 Z"
+                fill="rgba(255,255,255,0.18)"
+              />
+              <path
+                d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26"
+                stroke="rgba(255,255,255,0.7)" strokeWidth="2.5" strokeLinecap="round"
+              />
+              <circle cx="55" cy="22" r="4" fill="white" opacity="0.9" />
             </svg>
           </div>
-          <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 6 }}>Momentum</h1>
+          <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 6, letterSpacing: '-0.5px' }}>Momentum</h1>
           <p className="muted" style={{ fontSize: 14 }}>
             {mode === 'signin' ? 'Welcome back.' : 'Create your account.'}
           </p>
