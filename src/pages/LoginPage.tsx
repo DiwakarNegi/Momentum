@@ -3,11 +3,12 @@ import { supabase } from '../lib/supabase'
 
 export function LoginPage() {
   const [mode,     setMode]     = useState<'signin' | 'signup'>('signin')
+  const [name,     setName]     = useState('')
   const [email,    setEmail]    = useState('')
   const [password, setPassword] = useState('')
   const [loading,  setLoading]  = useState(false)
   const [error,    setError]    = useState<string | null>(null)
-  const [check,    setCheck]    = useState(false)  // show "check your email" after signup
+  const [check,    setCheck]    = useState(false)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
@@ -18,7 +19,11 @@ export function LoginPage() {
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) setError(error.message)
     } else {
-      const { error } = await supabase.auth.signUp({ email, password })
+      const { error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: { data: { full_name: name.trim() } },
+      })
       if (error) setError(error.message)
       else setCheck(true)
     }
@@ -65,6 +70,22 @@ export function LoginPage() {
           </div>
         ) : (
           <form className="card card-pad" style={{ display: 'flex', flexDirection: 'column', gap: 16 }} onSubmit={handleSubmit}>
+            {mode === 'signup' && (
+              <div>
+                <label className="eyebrow" style={{ display: 'block', marginBottom: 7 }}>Your name</label>
+                <input
+                  className="field"
+                  type="text"
+                  placeholder="What should we call you?"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  required={mode === 'signup'}
+                  autoFocus
+                  maxLength={40}
+                  style={{ width: '100%', boxSizing: 'border-box' }}
+                />
+              </div>
+            )}
             <div>
               <label className="eyebrow" style={{ display: 'block', marginBottom: 7 }}>Email</label>
               <input
