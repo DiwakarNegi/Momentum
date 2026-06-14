@@ -19,7 +19,13 @@ export function Nav({ active, onChange }: Props) {
   return (
     <aside className="sidebar">
       <div className="brand">
-        <div className="brand-mark"><Icon name="spark" size={20} /></div>
+        <div className="brand-mark" style={{ overflow: 'hidden', position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <svg width="22" height="22" viewBox="0 0 72 72" fill="none" style={{ position: 'absolute' }}>
+            <path d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26 L72 72 L0 72 Z" fill="currentColor" opacity="0.25" />
+            <path d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+            <circle cx="55" cy="22" r="7" fill="currentColor" />
+          </svg>
+        </div>
         <span className="brand-name">Momentum</span>
       </div>
       <nav className="nav-group" aria-label="Main">
