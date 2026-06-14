@@ -23,6 +23,12 @@ type Tab = 'home' | 'habits' | 'jobs' | 'reflect' | 'focus'
 
 interface Props {
   onNavigate: (tab: Tab) => void
+  userEmail:  string
+}
+
+function firstName(email: string): string {
+  const raw = email.split('@')[0] ?? ''
+  return raw.charAt(0).toUpperCase() + raw.slice(1)
 }
 
 function fmtToday() {
@@ -40,7 +46,7 @@ function statusMessage(score: number, lastActiveDate: string | null, today: stri
   return "A small step today is enough. You've got this."
 }
 
-export function DashboardPage({ onNavigate }: Props) {
+export function DashboardPage({ onNavigate, userEmail }: Props) {
   const today           = format(new Date(), 'yyyy-MM-dd')
   const habits          = useHabits()
   const todayLogs       = useTodayLogs()
@@ -72,7 +78,7 @@ export function DashboardPage({ onNavigate }: Props) {
     <div className="page fade-up">
       <header style={{ marginBottom: 26 }}>
         <div className="eyebrow" style={{ marginBottom: 7 }}>{fmtToday()}</div>
-        <h1 className="h-greet">{returning ? 'Welcome back' : 'Hello'}</h1>
+        <h1 className="h-greet">{returning ? `Welcome back, ${firstName(userEmail)}` : `Hello, ${firstName(userEmail)}`}</h1>
       </header>
 
       <div className="dash-top">

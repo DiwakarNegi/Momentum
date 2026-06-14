@@ -303,6 +303,14 @@ export async function clearAllData(): Promise<void> {
       db.meta.clear(),
     ])
   })
+  // Mark initialized so seed doesn't re-run on next load, then sync empty state to cloud
+  await setMeta('initialized', true)
+  try {
+    const payload = await buildDataPayload()
+    await pushToCloud(payload)
+  } catch (e) {
+    console.error('Failed to sync clear to cloud:', e)
+  }
 }
 
 // ─── Focus session operations ─────────────────────────────────────────────────

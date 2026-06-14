@@ -79,7 +79,7 @@ export default function App() {
       <div className="app">
         <Nav active={tab} onChange={setTab} />
         <main className="main">
-          {tab === 'home'     && <DashboardPage onNavigate={setTab} />}
+          {tab === 'home'     && <DashboardPage onNavigate={setTab} userEmail={(session as import('@supabase/supabase-js').Session).user.email ?? ''} />}
           {tab === 'habits'   && <HabitsPage />}
           {tab === 'jobs'     && <JobsPage />}
           {tab === 'reflect'  && <ReflectPage />}
