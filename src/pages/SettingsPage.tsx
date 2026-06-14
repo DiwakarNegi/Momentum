@@ -5,10 +5,11 @@ import { exportAllData, importAllData, clearAllData, updateSetting } from '../db
 import { usePalette, THEMES, DISPLAY_FONTS, type PaletteId } from '../lib/usePalette'
 
 interface Props {
-  palette: ReturnType<typeof usePalette>
+  palette:    ReturnType<typeof usePalette>
+  onSignOut?: () => void
 }
 
-export function SettingsPage({ palette }: Props) {
+export function SettingsPage({ palette, onSignOut }: Props) {
   const settings = useSettings()
   const { palette: activePalette, setPalette, displayFont, setDisplayFont } = palette
 
@@ -228,6 +229,24 @@ export function SettingsPage({ palette }: Props) {
           </div>
         </div>
       </section>
+
+      {/* ── Account ──────────────────────────────────────────────────── */}
+      {onSignOut && (
+        <section style={{ marginBottom: 40 }}>
+          <div className="eyebrow" style={{ marginBottom: 12 }}>Account</div>
+          <div className="card card-pad">
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 16 }}>
+              <div>
+                <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 3 }}>Sign out</div>
+                <div className="muted" style={{ fontSize: 12.5 }}>Your data is saved to the cloud and will be here when you return.</div>
+              </div>
+              <button className="btn btn-ghost btn-sm" style={{ flexShrink: 0 }} onClick={onSignOut}>
+                Sign out
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   )
 }

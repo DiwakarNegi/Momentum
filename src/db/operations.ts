@@ -12,6 +12,35 @@ import {
   FLOOR,
 } from '../lib/momentum'
 import { computeStreak } from '../lib/streak'
+import { pushToCloud } from '../lib/supabase'
+
+// ─── Cloud sync (debounced — fires 2s after last write) ───────────────────────
+
+let _syncTimer: ReturnType<typeof setTimeout> | null = null
+
+async function buildDataPayload() {
+  const [habits, habitLogs, jobApplications, reflections, momentumSnapshots, focusSessions, focusTasks, meta] =
+    await Promise.all([
+      db.habits.toArray(),
+      db.habitLogs.toArray(),
+      db.jobApplications.toArray(),
+      db.reflections.toArray(),
+      db.momentumSnapshots.toArray(),
+      db.focusSessions.toArray(),
+      db.focusTasks.toArray(),
+      db.meta.toArray(),
+    ])
+  return { version: 3, habits, habitLogs, jobApplications, reflections, momentumSnapshots, focusSessions, focusTasks, meta }
+}
+
+function scheduleSyncToCloud() {
+  if (_syncTimer) clearTimeout(_syncTimer)
+  _syncTimer = setTimeout(async () => {
+    _syncTimer = null
+    try { await pushToCloud(await buildDataPayload()) }
+    catch (e) { console.error('Cloud sync failed:', e) }
+  }, 2000)
+}
 
 // ─── Date helper ─────────────────────────────────────────────────────────────
 
@@ -57,6 +86,9 @@ export async function recomputeToday(): Promise<void> {
 
   // 4. Update personal best streak
   await recomputePersonalBest(todayStr)
+
+  // 5. Sync to cloud (debounced)
+  scheduleSyncToCloud()
 }
 
 async function getTodayActivity(dateStr: string) {
