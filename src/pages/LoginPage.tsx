@@ -39,26 +39,25 @@ export function LoginPage() {
         {/* Logo / wordmark */}
         <div style={{ textAlign: 'center', marginBottom: 36 }}>
           <div style={{
-            width: 72, height: 72, borderRadius: '50%', margin: '0 auto 18px',
+            width: 80, height: 80, borderRadius: 24, margin: '0 auto 20px',
             background: 'var(--accent)',
-            boxShadow: '0 0 48px -8px var(--accent), 0 0 0 1px rgba(255,255,255,0.08)',
+            boxShadow: '0 0 56px -8px var(--accent), 0 2px 0 0 rgba(255,255,255,0.12) inset',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
             overflow: 'hidden', position: 'relative',
           }}>
-            {/* wave fill — echoes the momentum orb */}
-            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" style={{ position: 'absolute', inset: 0 }}>
+            <svg width="52" height="52" viewBox="0 0 24 24" fill="none" style={{ position: 'relative', zIndex: 1 }}>
               <path
-                d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26 L72 72 L0 72 Z"
-                fill="rgba(255,255,255,0.18)"
+                d="M2 17 C5 17 6 10 9 10 C12 10 13 15 16 13 C19 11 20 7 22 6 L22 24 L2 24 Z"
+                fill="rgba(0,0,0,0.18)"
               />
               <path
-                d="M0 44 C9 44 10 30 18 30 C26 30 27 40 36 37 C45 34 46 24 54 22 C62 20 64 28 72 26"
-                stroke="rgba(255,255,255,0.7)" strokeWidth="2.5" strokeLinecap="round"
+                d="M2 17 C5 17 6 10 9 10 C12 10 13 15 16 13 C19 11 20 7 22 6"
+                stroke="rgba(0,0,0,0.75)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"
               />
-              <circle cx="55" cy="22" r="4" fill="white" opacity="0.9" />
+              <circle cx="22" cy="6" r="2.4" fill="rgba(0,0,0,0.75)" />
             </svg>
           </div>
-          <h1 style={{ fontSize: 28, fontWeight: 700, marginBottom: 6, letterSpacing: '-0.5px' }}>Momentum</h1>
+          <h1 style={{ fontSize: 30, fontWeight: 800, marginBottom: 6, letterSpacing: '-0.8px' }}>Momentum</h1>
           <p className="muted" style={{ fontSize: 14 }}>
             {mode === 'signin' ? 'Welcome back.' : 'Create your account.'}
           </p>
